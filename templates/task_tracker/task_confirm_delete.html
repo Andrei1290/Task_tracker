@@ -1,0 +1,10 @@
+<div>
+    <h2>Видалення завдання</h2>
+    <p>Ви впевнені, що хочете видалити завдання "{{ object.title }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Так, видалити</button>
+        <a href="{% url 'task-list' %}">Ні, повернутися до списку завдань</a>
+    </form>
+</div>
