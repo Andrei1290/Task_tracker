@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load custom_tag %}
+{% load static %}
 
 <h2>{{ task.title }}</h2>
-<p>Status: {{ task.status }}</p>
-<p>Description: {{ task.description }}</p>
+<p>Status: 
+    <span class="status-label {{ task.status }}">
+        {{ task.get_status_display }}
+    </span>
+</p>
+
+<p class="task-desc">{{ task.description }}</p>
 <h2>Комментарии:</h2>
 
 <div class="comments">
@@ -31,7 +37,7 @@
         </div>
         <div class="comment-actions">
             <a href="{% url 'comment-update' comment.pk %}" class="edit-comment-btn">Изменить</a>
-            <a href="{% url 'comment-delete' comment.pk %}" class="delete-comment-btn">×</a>
+            <span class="delete-comment-btn" data-url="{% url 'comment-delete' comment.pk %}">×</span>
         </div>
     </div>
     {% empty %}
@@ -45,10 +51,24 @@
     <h4>Добавить комментарий</h4>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ comment_form.as_p }}
+        
+        {{ comment_form.non_field_errors }}
+    
+        <div class="form-field">
+            {{ comment_form.content.errors }}
+            {{ comment_form.content }}
+        </div>
+    
+        <div class="form-field">
+            {{ comment_form.media.errors }}
+            {{ comment_form.media }}
+        </div>
+    
         <button type="submit">Опубликовать</button>
     </form>
+    
 </div>
 
+<script src="{% static 'js/comment_delete_confirm.js' %}"></script>
 
 {% endblock %}

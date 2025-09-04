@@ -16,7 +16,7 @@
 <a href="{% url 'task-detail' task.pk %}" class="task-link">
     <div class="task-card" data-status="{{ task.status }}">
         <span class="task-title">{{ task.title }}</span>
-        <p class="task-status">{{ task.status }}</p>
+        <p class="task-status">{{ task.get_status_display }}</p>
     </div>
 </a>
 {% empty %}

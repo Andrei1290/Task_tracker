@@ -141,18 +141,20 @@ footer p a:hover, footer p .clickable:hover {
     flex-direction: column;
     gap: 10px;
     margin-top: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .comment {
     display: flex;
-    background-color: #e0e0e0;
+    background-color: #eafcfd;
     border-radius: 8px;
     padding: 10px;
     align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .comment-author {
-    background-color: #b0b0b0;
+    background-color: #c0dfe1;
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
@@ -203,6 +205,40 @@ footer p a:hover, footer p .clickable:hover {
     background-color: #c92a2a;
 }
 
+.add-comment form {
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-top: 15px;
+}
+
+.add-comment button {
+    background-color: #a1e7f6; /* желтая кнопка */
+    color: #1d3557;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-top: 10px;
+}
+
+.add-comment button:hover {
+    background-color: #92d6e5;
+    transform: translateY(-1px);
+}
+
+.add-comment .form-field {
+    margin-bottom: 10px;
+}
+
+.add-comment input[type="file"] {
+    display: block;
+    margin-top: 5px;
+}
+
 
 
 .task-card {
@@ -228,15 +264,15 @@ footer p a:hover, footer p .clickable:hover {
 
 /* Статусы */
 .task-card[data-status="done"]::before {
-    background-color: #28a745;
+    background-color: lightgreen;
 }
 
 .task-card[data-status="in_progress"]::before {
-    background-color: #0d6efd;
+    background-color: darkcyan;
 }
 
 .task-card[data-status="todo"]::before {
-    background-color: #fd7e14;
+    background-color: lightskyblue;
 }
 
 
@@ -342,4 +378,32 @@ footer p a:hover, footer p .clickable:hover {
     height: 110px;      /* высота картинки */
     object-fit: contain; /* масштабируем внутри контейнера */
     flex-shrink: 0;     /* чтобы картинка не сжималась */
+}
+
+.status-label.todo {
+    background-color: lightskyblue;
+    color: black;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.status-label.in_progress {
+    background-color: darkcyan;
+    color: black;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.status-label.done {
+    background-color: lightgreen;
+    color: black;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.task-desc {
+    background-color: #f0f8ff; /* светлый фон */
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    color: #1d3557;
 }
