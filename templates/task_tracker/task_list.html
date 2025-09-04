@@ -1,12 +1,25 @@
-<form method="get">
-    {{ form.status.label_tag }}
-    {{ form.status }}
-    <button type="submit">Filter</button>
-</form>
+{% extends 'base.html' %}
+{% block title %}Список задач{% endblock %}
+
+{% block content %}
+<h2>Список задач</h2>
+
+<div class="filter-wrapper">
+    <form method="get" id="filter-form">
+        {{ form.status }}
+        <button type="submit" class="filter-btn">Фильтровать</button>
+    </form>
+</div>
+
 
 {% for task in tasks %}
-<div>
-    <a href="{% url 'task-detail' task.pk %}">{{ task.title }}</a>
-    <p> {{ task.status }} </p>
-</div>
+<a href="{% url 'task-detail' task.pk %}" class="task-link">
+    <div class="task-card" data-status="{{ task.status }}">
+        <span class="task-title">{{ task.title }}</span>
+        <p class="task-status">{{ task.status }}</p>
+    </div>
+</a>
+{% empty %}
+<p>Заданий пока нет ¯\_(シ)_/¯</p>
 {% endfor %}
+{% endblock %}

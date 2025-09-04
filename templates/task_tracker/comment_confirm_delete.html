@@ -1,0 +1,10 @@
+<div>
+    <h2>Удаление коментария</h2>
+    <p>Вы уверены, что хотите удалить коментарий "{{ object.title }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Да, удалить</button>
+        <a href="{{ request.META.HTTP_REFERER }}">Нет, вернутся обратно</a>
+    </form>
+</div>

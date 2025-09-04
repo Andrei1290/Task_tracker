@@ -1,0 +1,345 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* шапка */
+header {
+    background-color: #a8dadc;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;        /* фиксированная высота шапки */
+    position: fixed;       /* фиксируем шапку */
+    top: 0;                /* приклеиваем к верхней части окна */
+    left: 0;
+    right: 0;
+    z-index: 1000;         /* чтобы шапка была поверх остального контента */
+}
+
+
+
+header .logo h1 a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* основной контент */
+main {
+    flex: 1;
+    padding: 20px;
+    margin-top: 100px; /* равно высоте шапки */
+}
+
+
+/* подвал */
+footer {
+    background-color: #d3d3d3;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+}
+
+footer p a, footer p .clickable {
+    color: #1d3557;
+    text-decoration: none;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+footer p a:hover, footer p .clickable:hover {
+    color: #457b9d;
+}
+
+#phone-container {
+    display: inline-block;
+    position: relative; /* для подпрыгивания */
+}
+
+#phone-text {
+    cursor: pointer;
+    color: #1d3557;      /* тот же цвет, что и текст футера */
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#phone-text:hover {
+    color: #457b9d;       /* эффект при наведении */
+}
+
+/* Анимация подпрыгивания */
+@keyframes jump {
+    0% { transform: translateY(0); }
+    30% { transform: translateY(-10px); }
+    50% { transform: translateY(0); }
+    70% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+.jump {
+    animation: jump 0.5s ease;
+}
+
+/* Tooltip */
+.tooltip-text {
+    position: absolute;
+    display: none;
+    background-color: #a8dadc; /* голубой фон */
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 9999;
+}
+
+
+
+.clickable {
+    cursor: pointer;
+    color: #1d3557;
+    text-decoration: none;
+}
+
+.clickable:hover {
+    color: #457b9d;
+}
+
+/* Подсказка "Скопировано!" */
+.copied-text {
+    display: none;           /* изначально скрыто */
+    margin-left: 5px;
+    font-size: 12px;
+    color: green;
+    font-weight: bold;
+}
+
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.comment {
+    display: flex;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    align-items: flex-start;
+}
+
+.comment-author {
+    background-color: #b0b0b0;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-actions {
+    margin-left: 10px;
+}
+
+.edit-comment-btn {
+    text-decoration: none;
+    color: #fff;
+    background-color: #f59f00;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.edit-comment-btn:hover {
+    background-color: #d97706;
+}
+
+.comment-actions {
+    margin-left: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.delete-comment-btn {
+    text-decoration: none;
+    color: #fff;
+    background-color: #f03e3e;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.delete-comment-btn:hover {
+    background-color: #c92a2a;
+}
+
+
+
+.task-card {
+    position: relative;
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    padding: 15px 15px 15px 25px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.task-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    border-radius: 10px 0 0 10px;
+    background-color: grey;
+}
+
+/* Статусы */
+.task-card[data-status="done"]::before {
+    background-color: #28a745;
+}
+
+.task-card[data-status="in_progress"]::before {
+    background-color: #0d6efd;
+}
+
+.task-card[data-status="todo"]::before {
+    background-color: #fd7e14;
+}
+
+
+.task-title {
+    font-weight: bold;
+    color: #1d3557;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.task-status {
+    color: #457b9d;
+    margin-top: 5px;
+}
+
+
+.filter-wrapper {
+    margin-bottom: 20px;
+}
+
+#filter-form select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f0f8ff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#filter-form select:hover {
+    background-color: #e0f0ff;
+}
+
+
+.task-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.task-link:hover .task-card {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #f0f8ff;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-left: 10px;
+}
+
+.filter-btn:hover {
+    background-color: #e0f0ff;
+    transform: translateY(-1px);
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #fff; /* или цвет ссылок в меню */
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-btn:hover {
+    text-decoration: underline;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h1 a {
+    display: flex;           /* ставим картинку и текст в ряд */
+    align-items: center;     /* центрируем текст по вертикали относительно картинки */
+    gap: 10px;               /* отступ между картинкой и текстом */
+    text-decoration: none;   /* убираем подчеркивание ссылки */
+    color: inherit;          /* чтобы текст был того же цвета, что и заголовок */
+    font-size: 32px; /* было 24px, увеличиваем */
+    font-weight: bold;
+}
+
+.site-title {
+    font-size: 36px;    /* размер шрифта */
+    font-weight: bold;  /* жирный текст */
+    line-height: 1;     /* чтобы текст выравнивался по вертикали с картинкой */
+}
+
+
+.mascot-img {
+    width: 110px;       /* ширина картинки */
+    height: 110px;      /* высота картинки */
+    object-fit: contain; /* масштабируем внутри контейнера */
+    flex-shrink: 0;     /* чтобы картинка не сжималась */
+}

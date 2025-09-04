@@ -1,3 +1,54 @@
-<h2> {{ task.title }} </h2>
-<p> {{ task.status }} </p>
-<p> {{ task.description }} </p>
+{% extends 'base.html' %}
+{% block content %}
+{% load custom_tag %}
+
+<h2>{{ task.title }}</h2>
+<p>Status: {{ task.status }}</p>
+<p>Description: {{ task.description }}</p>
+<h2>Комментарии:</h2>
+
+<div class="comments">
+    {% for comment in task.comments.all %}
+    <div class="comment">
+        <div class="comment-author">
+            {{ comment.author.username }}
+        </div>
+        <div class="comment-content">
+            {{ comment.content }}
+            {% if comment.media %}
+                <div>
+                    {% if comment.media.url|endswith:'.jpg' or comment.media.url|endswith:'.png' or comment.media.url|endswith:'.jpeg' %}
+                        <img src="{{ comment.media.url }}" style="max-width: 500px;">
+                    {% elif comment.media.url|endswith:'mp4' %}
+                        <video width="320" height="240" controls>
+                            <source src="{{ comment.media.url }}" type="video/mp4">
+                        </video>
+                    {% else %}
+                        <a href="{{ comment.media.url }}">Скачать файл</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="comment-actions">
+            <a href="{% url 'comment-update' comment.pk %}" class="edit-comment-btn">Изменить</a>
+            <a href="{% url 'comment-delete' comment.pk %}" class="delete-comment-btn">×</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>Комментариев пока что нет...</p>
+    {% endfor %}
+</div>
+
+
+
+<div class="add-comment">
+    <h4>Добавить комментарий</h4>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Опубликовать</button>
+    </form>
+</div>
+
+
+{% endblock %}

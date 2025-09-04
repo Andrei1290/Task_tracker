@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Task Tracker{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>
+                <a href="{% url 'task-list' %}">
+                    <img src="{% static 'img/lightblue-furry-cat.svg' %}" alt="Mascot" class="mascot-img">
+                    <span class="site-title">Task Tracker</span>
+                </a>
+            </h1>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="{% url 'task-list' %}" class="nav-btn" >Все задачи</a></li>
+    
+                {% if request.user.is_authenticated %}
+                    <li>{{ request.user.username }}</li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-btn">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}" class="nav-btn">Логин</a></li>
+                {% endif %}
+    
+                <li><a href="#" class="nav-btn">Поиск</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        <p>© 2025 Task Tracker. Все права защищены… почти</p>
+        <p>
+            Мои ссылки:
+            <a href="https://andrey1290.itch.io/" target="_blank">ITCH.IO</a> |
+            <a href="https://www.youtube.com/@andrei1290_YT" target="_blank">YOUTUBE</a> |
+            <span id="phone-container">
+                <span id="phone-text">ТЕЛЕФОН</span>
+            </span>
+        </p>
+    
+        <!-- Tooltip -->
+        <span id="copied-tooltip" class="tooltip-text">Скопировано!</span>
+</body>
+</html>
+
+<script src="{% static 'js/scripts.js' %}"></script>
