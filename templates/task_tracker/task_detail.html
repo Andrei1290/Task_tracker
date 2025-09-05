@@ -35,8 +35,19 @@
                 </div>
             {% endif %}
         </div>
+
+        <!-- Поле редактирования скрытое -->
+        <div class="comment-edit-form" style="display:none;">
+            <textarea class="edit-content">{{ comment.content }}</textarea>
+            <div class="edit-buttons">
+                <button class="save-edit-btn" data-url="{% url 'comment-update' comment.pk %}">Сохранить</button>
+                <button class="cancel-edit-btn">Отмена</button>
+            </div>
+        </div>
+
+
         <div class="comment-actions">
-            <a href="{% url 'comment-update' comment.pk %}" class="edit-comment-btn">Изменить</a>
+            <span class="edit-comment-btn" data-author-id="{{ comment.author.id }}">Изменить</span>
             <span class="delete-comment-btn" data-url="{% url 'comment-delete' comment.pk %}">×</span>
         </div>
     </div>
@@ -44,8 +55,6 @@
     <p>Комментариев пока что нет...</p>
     {% endfor %}
 </div>
-
-
 
 <div class="add-comment">
     <h4>Добавить комментарий</h4>
@@ -70,5 +79,6 @@
 </div>
 
 <script src="{% static 'js/comment_delete_confirm.js' %}"></script>
+<script src="{% static 'js/comment_edit.js' %}"></script>
 
 {% endblock %}

@@ -174,15 +174,15 @@ footer p a:hover, footer p .clickable:hover {
 
 .edit-comment-btn {
     text-decoration: none;
-    color: #fff;
-    background-color: #f59f00;
+    color: #1d3557;
+    background-color: #a1e7f6;
     padding: 4px 8px;
     border-radius: 5px;
     font-size: 12px;
 }
 
 .edit-comment-btn:hover {
-    background-color: #d97706;
+    background-color: #92d6e5;
 }
 
 .comment-actions {
@@ -214,7 +214,7 @@ footer p a:hover, footer p .clickable:hover {
 }
 
 .add-comment button {
-    background-color: #a1e7f6; /* желтая кнопка */
+    background-color: #a1e7f6;
     color: #1d3557;
     border: none;
     padding: 8px 16px;
@@ -406,4 +406,192 @@ footer p a:hover, footer p .clickable:hover {
     margin-top: 10px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     color: #1d3557;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.login-box {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 300px;
+    text-align: center;
+}
+
+.login-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-field {
+    margin-bottom: 15px;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.login-btn {
+    background: #1e88e5; /* синий */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: #1565c0;
+}
+
+.register-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #fbc02d; /* жёлтый */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+
+.comment-edit-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.comment-edit-form textarea.edit-content {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.comment-edit-form textarea.edit-content:focus {
+    outline: none;
+    border-color: #1e88e5;
+    box-shadow: 0 0 5px rgba(30,136,229,0.3);
+}
+
+.comment-edit-form .edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.comment-edit-form .edit-buttons button {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.comment-edit-form .save-edit-btn {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.comment-edit-form .save-edit-btn:hover {
+    background-color: #1565c0;
+}
+
+.comment-edit-form .cancel-edit-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.comment-edit-form .cancel-edit-btn:hover {
+    background-color: #b3b3b3;
+}
+
+
+.add-comment form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.add-comment textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.add-comment textarea:focus {
+    outline: none;
+    border-color: #1e88e5;
+    box-shadow: 0 0 5px rgba(30,136,229,0.3);
+}
+
+.add-comment .comment-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.add-comment .comment-buttons button {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.add-comment .submit-comment-btn {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.add-comment .submit-comment-btn:hover {
+    background-color: #1565c0;
+}
+
+.add-comment .cancel-comment-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.add-comment .cancel-comment-btn:hover {
+    background-color: #b3b3b3;
 }

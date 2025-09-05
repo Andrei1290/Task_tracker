@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from task_tracker import models
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import TaskForm, CommentForm, TaskFilterForm
+from .forms import TaskForm, CommentForm, TaskFilterForm, SimpleRegisterForm, SimpleLoginForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixin import UserIsOwnerMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.views import LoginView, LogoutView
+
+from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
 
 # Create your views here.
 
@@ -70,13 +73,19 @@ class CommentUpdateView(UpdateView):
     model = models.Comment
     fields = ["content"]
 
-    def from_valid(self, form):
+    def form_valid(self, form):
         comment = self.get_object()
         if comment.author != self.request.user:
             raise PermissionDenied("Вы не являетесь автором коментария!")
         return super().form_valid(form)
     def get_success_url(self):
         return reverse_lazy('task-detail', kwargs={'pk':self.object.task.pk})
+    def dispatch(self, request, *args, **kwargs):
+        comment = self.get_object()
+        if comment.author != request.user:
+            raise PermissionDenied("Вы не автор этого комментария!")
+        return super().dispatch(request, *args, **kwargs)
+
     
 
 class CommentDeleteView(DeleteView):
@@ -96,8 +105,17 @@ class CommentDeleteView(DeleteView):
 
 class CustomLoginView(LoginView):
     redirect_authenticated_user = True
-    template_name='task_tracker/login.html'
+    template_name = 'task_tracker/login.html'
+    authentication_form = SimpleLoginForm  # <--- вот это
 
 
 class CustomLogoutView(LogoutView):
     next_page = 'login'
+
+
+
+class RegisterView(generic.CreateView):
+    form_class = SimpleRegisterForm
+    template_name = "task_tracker/register.html"
+    success_url = reverse_lazy("login")
+
