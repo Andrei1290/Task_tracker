@@ -20,6 +20,8 @@
         <nav>
             <ul>
                 <li><a href="{% url 'task-list' %}" class="nav-btn" >Все задачи</a></li>
+
+                <li><a href="{% url 'task-create' %}" class="nav-btn">Создать</a></li>
     
                 {% if request.user.is_authenticated %}
                     <li>{{ request.user.username }}</li>
@@ -33,7 +35,6 @@
                     <li><a href="{% url 'login' %}" class="nav-btn">Логин</a></li>
                 {% endif %}
     
-                <li><a href="#" class="nav-btn">Поиск</a></li>
             </ul>
         </nav>
     </header>
@@ -42,6 +43,9 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <a href="{% url 'task-create' %}" class="floating-btn">+</a>
+
     
     <footer>
         <p>© 2025 Task Tracker. Все права защищены… почти</p>

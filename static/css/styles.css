@@ -385,18 +385,21 @@ footer p a:hover, footer p .clickable:hover {
     color: black;
     padding: 2px 6px;
     border-radius: 4px;
+    font-size: 1.2rem;
 }
 .status-label.in_progress {
     background-color: darkcyan;
     color: black;
     padding: 2px 6px;
     border-radius: 4px;
+    font-size: 1.2rem;
 }
 .status-label.done {
     background-color: lightgreen;
     color: black;
     padding: 2px 6px;
     border-radius: 4px;
+    font-size: 1.2rem;
 }
 
 .task-desc {
@@ -594,4 +597,144 @@ footer p a:hover, footer p .clickable:hover {
 
 .add-comment .cancel-comment-btn:hover {
     background-color: #b3b3b3;
+}
+
+
+.floating-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #1e88e5;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.2s, transform 0.2s;
+    z-index: 2000;
+}
+
+.floating-btn:hover {
+    background-color: #1565c0;
+    transform: translateY(-2px);
+}
+
+
+.task-form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.task-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1d3557;
+}
+
+.task-form .form-field {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.task-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.task-form input,
+.task-form select,
+.task-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background: #fff;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.task-form input:focus,
+.task-form select:focus,
+.task-form textarea:focus {
+    outline: none;
+    border-color: #1e88e5;
+    box-shadow: 0 0 5px rgba(30,136,229,0.3);
+}
+
+.task-form button {
+    background: #1e88e5;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.task-form button:hover {
+    background: #1565c0;
+}
+
+.complete-task-btn {
+    background-color: #2ecc71; /* зелёная */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.complete-task-btn:hover {
+    background-color: #27ae60;
+    transform: translateY(-1px);
+}
+
+.status-btn {
+    background-color: #1e88e5;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.status-btn:hover {
+    background-color: #1565c0;
+    transform: translateY(-1px);
+}
+
+.delete-task-btn {
+    background-color: #f03e3e;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.delete-task-btn:hover {
+    background-color: #c92a2a;
+    transform: translateY(-1px);
 }

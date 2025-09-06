@@ -10,7 +10,31 @@
     </span>
 </p>
 
+<p>Creator: {{ task.creator }}</p>
 <p class="task-desc">{{ task.description }}</p>
+
+{% if request.user == task.creator %}
+    <form method="post" action="{% url 'task-update-status' task.pk %}" style="margin-top:15px;">
+        {% csrf_token %}
+        <label for="status">Статус:</label>
+        <select name="status" id="status">
+            <option value="todo" {% if task.status == "todo" %}selected{% endif %}>To Do</option>
+            <option value="in_progress" {% if task.status == "in_progress" %}selected{% endif %}>In Progress</option>
+            <option value="done" {% if task.status == "done" %}selected{% endif %}>Done</option>
+        </select>
+        <button type="submit" class="status-btn">Изменить</button>
+    </form>
+{% endif %}
+
+{% if request.user == task.creator %}
+    <form method="post" action="{% url 'task-delete' task.pk %}" onsubmit="return confirm('Точно удалить задачу?');" style="margin-top:15px;">
+        {% csrf_token %}
+        <button type="submit" class="delete-task-btn">🗑️ Удалить задачу</button>
+    </form>
+{% endif %}
+
+
+
 <h2>Комментарии:</h2>
 
 <div class="comments">

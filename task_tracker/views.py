@@ -11,6 +11,11 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 
+from django.contrib.auth.decorators import login_required
+
+from django.views import View
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
 
 class TaskListView(ListView):
@@ -50,24 +55,46 @@ class TaskDetailView(DetailView):
             return redirect('task-detail', pk=comment.task.pk)
     
 
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin, CreateView):
     model = models.Task
-    success_url = reverse_lazy('tast-list')
-    
-    def form_valid(self, form):
-        form.instance.creator = self.request.user
-        return super().form_valid(form)
+    form_class = TaskForm
+    template_name = "task_tracker/task_form.html"  # шаблон, где будет форма
+    success_url = reverse_lazy("task-list")  # после сохранения вернёт на список задач
 
+    def form_valid(self, form):
+        form.instance.creator = self.request.user  # автор автоматически = текущий юзер
+        return super().form_valid(form)
 
 class TaskUpdateView(LoginRequiredMixin, UserIsOwnerMixin, UpdateView):
     model = models.Task
     form_class = TaskForm
     success_url = reverse_lazy('task-list')
 
+class TaskCompleteView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        task = get_object_or_404(models.Task, pk=pk)
+        if task.creator != request.user:
+            raise PermissionDenied("Вы не автор этой задачи!")
+        task.status = "done"
+        task.save()
+        return redirect("task-detail", pk=task.pk)
+    
+class TaskUpdateStatusView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        task = get_object_or_404(models.Task, pk=pk)
+        if task.creator != request.user:
+            raise PermissionDenied("Вы не автор этой задачи!")
+        new_status = request.POST.get("status")
+        if new_status in dict(models.Task.STATUS_CHOICES).keys():
+            task.status = new_status
+            task.save()
+        return redirect("task-detail", pk=task.pk)
 
 class TaskDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
     model = models.Task
     success_url = reverse_lazy('task-list')
+
+
 
 class CommentUpdateView(UpdateView):
     model = models.Comment
